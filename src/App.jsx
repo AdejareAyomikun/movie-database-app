@@ -1,28 +1,61 @@
 import { useState } from "react";
 import SearchBar from "./components/SearchBar";
-import { searchMovies } from "./services/omdb";
 import MovieGrid from "./components/MovieGrid";
 
 export default function App() {
   const [movies, setMovies] = useState([]);
-  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSearch = async (query) => {
     if (!query) return;
-    const { movies, error } = await searchMovies(query);
-    setMovies(movies);
-    setError(error);
+
+    setLoading(true);
+    setError("");
+    setMovies([]);
+
+    try {
+      const res = await fetch(
+        `https://www.omdbapi.com/?apikey=${
+          import.meta.env.VITE_OMDB_API_KEY
+        }&s=${query}`
+      );
+      const data = await res.json();
+
+      if (data.Response === "True") {
+        setMovies(data.Search);
+      } else {
+        setError(data.Error || "No movies found.");
+      }
+    } catch (err) {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-900">
-      <header className="bg-indigo-600 text-white p-4 text-center text-xl font-bold">
+    <div className="app-container">
+      <header className="app-title">
         🎬 Movie Database
       </header>
-      <main className="p-4 max-w-4xl mx-auto">
+      <main>
         <SearchBar onSearch={handleSearch} />
-        {error && <p className="text-red-500 mt-4">{error}</p>}
+
+        {/* {loading && <p>Loading...</p>}
+        {error && <p>{error}</p>}
+
+        <MovieGrid movies={movies} /> */}
+
+              {loading ? (
+        <p className="status-message">Loading...</p>
+      ) : error ? (
+        <p className="status-message error">{error}</p>
+      ) : movies.length > 0 ? (
         <MovieGrid movies={movies} />
+      ) : (
+        <p className="no-movies">Search for a movie to get started!</p>
+      )}
       </main>
     </div>
   );
