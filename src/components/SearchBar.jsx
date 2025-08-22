@@ -9,21 +9,14 @@ export default function SearchBar({ onSearch }) {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="search-bar"
-    >
+    <form onSubmit={handleSubmit} className="search-bar">
       <input
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search for a movie..."
       />
-      <button
-        type="submit"
-      >
-        Search
-      </button>
+      <button type="submit">Search</button>
     </form>
   );
 }

@@ -3,10 +3,7 @@ export default function MovieCard({ movie }) {
     <div className="movie-card">
       <div className="poster">
         {movie.Poster && movie.Poster !== "N/A" ? (
-          <img
-            src={movie.Poster}
-            alt={movie.Title}
-          />
+          <img src={movie.Poster} alt={movie.Title} />
         ) : (
           <span>No Image</span>
         )}

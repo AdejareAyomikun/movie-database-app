@@ -36,9 +36,7 @@ export default function App() {
 
   return (
     <div className="app-container">
-      <header className="app-title">
-        🎬 Movie Database
-      </header>
+      <header className="app-title">🎬 Movie Database</header>
       <main>
         <SearchBar onSearch={handleSearch} />
 
@@ -47,15 +45,15 @@ export default function App() {
 
         <MovieGrid movies={movies} /> */}
 
-              {loading ? (
-        <p className="status-message">Loading...</p>
-      ) : error ? (
-        <p className="status-message error">{error}</p>
-      ) : movies.length > 0 ? (
-        <MovieGrid movies={movies} />
-      ) : (
-        <p className="no-movies">Search for a movie to get started!</p>
-      )}
+        {loading ? (
+          <p className="status-message">Loading...</p>
+        ) : error ? (
+          <p className="status-message error">{error}</p>
+        ) : movies.length > 0 ? (
+          <MovieGrid movies={movies} />
+        ) : (
+          <p className="no-movies">Search for a movie to get started!</p>
+        )}
       </main>
     </div>
   );
