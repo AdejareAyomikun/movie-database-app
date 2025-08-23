@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { Routes,Route } from "react-router-dom";
 import SearchBar from "./components/SearchBar";
 import MovieGrid from "./components/MovieGrid";
+import MovieDetails from "./components/MovieDetails";
 
 export default function App() {
   const [movies, setMovies] = useState([]);
@@ -35,26 +37,28 @@ export default function App() {
   };
 
   return (
-    <div className="app-container">
-      <header className="app-title">🎬 Movie Database</header>
-      <main>
-        <SearchBar onSearch={handleSearch} />
-
-        {/* {loading && <p>Loading...</p>}
-        {error && <p>{error}</p>}
-
-        <MovieGrid movies={movies} /> */}
-
-        {loading ? (
-          <p className="status-message">Loading...</p>
-        ) : error ? (
-          <p className="status-message error">{error}</p>
-        ) : movies.length > 0 ? (
-          <MovieGrid movies={movies} />
-        ) : (
-          <p className="no-movies">Search for a movie to get started!</p>
-        )}
-      </main>
-    </div>
+<div className="app-container">
+  <header className="app-title">🎬 Movie Database</header>
+  <Routes>
+    <Route
+      path="/"
+      element={
+        <>
+          <SearchBar onSearch={handleSearch} />
+          {loading ? (
+            <p className="status-message">Loading...</p>
+          ) : error ? (
+            <p className="status-message error">{error}</p>
+          ) : movies.length > 0 ? (
+            <MovieGrid movies={movies} />
+          ) : (
+            <p className="no-movies">Search for a movie to get started!</p>
+          )}
+        </>
+      }
+    />
+    <Route path="/movie/:id" element={<MovieDetails />} />
+  </Routes>
+</div>
   );
 }
