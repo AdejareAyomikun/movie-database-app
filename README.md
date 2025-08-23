@@ -19,30 +19,30 @@ A simple movie search app that lets you find films via the OMDb API, view result
 
 ## Quick Start
 
-npm create vite@latest movie-db -- --template react
-cd movie-db
-npm i
-npm i react-router-dom
+* npm create vite@latest movie-db -- --template react
+* cd movie-db
+* npm i
+* npm i react-router-dom
 
 
 Add your OMDb API key (free): https://www.omdbapi.com/apikey.aspx
-Create .env.local at the project root:
-VITE_OMDB_API_KEY=YOUR_OMDB_KEY
+* Create .env.local at the project root:
+* VITE_OMDB_API_KEY=YOUR_OMDB_KEY
 
 Run the app:
-npm run dev
+* npm run dev
 
 ## Project Structure
 
-src/
-  components/
-    SearchBar.jsx
-    MovieGrid.jsx
-    MovieCard.jsx
-    MovieDetails.jsx
-  App.jsx
-  App.css
-  main.jsx
+* src/
+  * components/
+    * SearchBar.jsx
+    * MovieGrid.jsx
+    * MovieCard.jsx
+    * MovieDetails.jsx
+  * App.jsx
+  * App.css
+  * main.jsx
 
 ## How It Works
 - SearchBar triggers a fetch to https://www.omdbapi.com/?s=<query>&apikey=...
