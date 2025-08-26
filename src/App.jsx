@@ -3,6 +3,7 @@ import { Routes,Route } from "react-router-dom";
 import SearchBar from "./components/SearchBar";
 import MovieGrid from "./components/MovieGrid";
 import MovieDetails from "./components/MovieDetails";
+import Loader from "./components/Loader";
 
 export default function App() {
   const [movies, setMovies] = useState([]);
@@ -46,7 +47,7 @@ export default function App() {
         <>
           <SearchBar onSearch={handleSearch} />
           {loading ? (
-            <p className="status-message">Loading...</p>
+            <Loader />
           ) : error ? (
             <p className="status-message error">{error}</p>
           ) : movies.length > 0 ? (
