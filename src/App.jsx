@@ -9,6 +9,8 @@ import Favorites from "./components/Favorites";
 export default function App() {
   const [movies, setMovies] = useState([]);
   const [favorites, setFavorites] = useState([]);
+  const [recommended, setRecommended] = useState([]);
+  const [latest, setLatest] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -23,6 +25,36 @@ export default function App() {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
 
+  // Fetch recommended & latest movies by default
+  useEffect(() => {
+    const fetchDefaults = async () => {
+      try {
+        // Recommended Movies (e.g. Avengers)
+        const res1 = await fetch(
+          `https://www.omdbapi.com/?apikey=${
+            import.meta.env.VITE_OMDB_API_KEY
+          }&s=avengers`
+        );
+        const data1 = await res1.json();
+        if (data1.Response === "True") setRecommended(data1.Search);
+
+        // Latest Movies (e.g. 2025 releases)
+        const res2 = await fetch(
+          `https://www.omdbapi.com/?apikey=${
+            import.meta.env.VITE_OMDB_API_KEY
+          }&s=2025`
+        );
+        const data2 = await res2.json();
+        if (data2.Response === "True") setLatest(data2.Search);
+      } catch (err) {
+        console.error("Error fetching default movies:", err);
+      }
+    };
+
+    fetchDefaults();
+  }, []);
+
+  // Search handler
   const handleSearch = async (query) => {
     if (!query) return;
 
@@ -80,8 +112,32 @@ export default function App() {
               ) : movies.length > 0 ? (
                 <MovieGrid movies={movies} onFavorite={addToFavorites} />
               ) : (
-                <p className="no-movies">Search for a movie to get started!</p>
+                <>
+                  {/* Default Sections */}
+                  {recommended.length > 0 && (
+                    <>
+                      <h2>✨ Recommended</h2>
+                      <MovieGrid
+                        movies={recommended}
+                        onFavorite={addToFavorites}
+                        favorites={favorites}
+                      />
+                    </>
+                  )}
+
+                  {latest.length > 0 && (
+                    <>
+                      <h2>🆕 Latest Releases</h2>
+                      <MovieGrid
+                        movies={latest}
+                        onFavorite={addToFavorites}
+                        favorites={favorites}
+                      />
+                    </>
+                  )}
+                </>
               )}
+
               {favorites.length > 0 && (
                 <>
                   <h2>⭐ Your Favorites</h2>
