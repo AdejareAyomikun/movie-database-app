@@ -1,9 +1,33 @@
-body {
+/* ====== THEME VARIABLES ====== */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #1a1a1a;
+  --card-bg: #f5f5f5;
+  --btn-bg: #007bff;
+  --btn-text: #ffffff;
+}
+
+[data-theme="dark"] {
+  --bg-color: #121212;
+  --text-color: #f0f0f0;
+  --card-bg: #1e1e1e;
+  --btn-bg: #ff9800;
+  --btn-text: #121212;
+}
+
+/* ====== GLOBAL RESET & BASE ====== */
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #f4f6f9;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body,
+html {
+  font-family: Arial, sans-serif;
+  background: var(--bg-color);
+  color: var(--text-color);
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 /* General App Styles */
@@ -13,31 +37,36 @@ body {
   flex-wrap: wrap;
   gap: 20px;
   padding: 12px;
-  background: #222;
+  background: var(--card-bg);
+  color: var(--text-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 .navbar a {
-  color: white;
+  color: var(--text-color);
   text-decoration: none;
   font-weight: bold;
-  transition: color 0.3s;
+  transition: color 0.3s ease;
 }
 
 .navbar a:hover {
-  color: gold;
+  color: var(--btn-bg);
 }
 
 .app-container {
-  text-align: center;
-  padding: 20px;
-  background: #f4f6f9;
-  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
 }
 
 .app-title {
   font-size: 2.2rem;
-  margin-bottom: 20px;
-  color: #222;
+  margin: 20px 0;
+  font-weight: bold;
+  color: var(--text-color);
+  transition: color 0.3s ease;
 }
 
 .no-movies {
@@ -60,7 +89,11 @@ body {
   max-width: 350px;
   padding: 10px 15px;
   border-radius: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--btn-bg);
+  background: var(--card-bg);
+  color: var(--text-color);
+  outline: none;
+  transition: all 0.3s ease;
   font-size: 1rem;
 }
 
@@ -72,8 +105,8 @@ body {
 
 .search-bar button {
   padding: 10px 20px;
-  background-color: #2563eb;
-  color: white;
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
   border: none;
   border-radius: 8px;
   font-size: 1rem;
@@ -82,7 +115,8 @@ body {
 }
 
 .search-bar button:hover {
-  background-color: #1e40af;
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
 }
 
 /* Movie Grid */
@@ -91,19 +125,24 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 24px;
-  justify-content: center;   /* Centers the grid horizontally */
-  align-items: center;        /* Keeps items aligned neatly */
+  justify-content: center; /* Centers the grid horizontally */
+  align-items: center; /* Keeps items aligned neatly */
+  color: var(--text-color);
   padding: 20px;
   margin: 0 auto;
-  max-width: 1200px;         /* Prevents it from stretching too wide */
-  text-align: center;        /* Centers text inside */
+  max-width: 1200px; /* Prevents it from stretching too wide */
+  text-align: center; /* Centers text inside */
+}
+
+.movie-details {
+  text-align: center;
 }
 
 /* Optional wrapper styling */
 .w-full {
   width: 100%;
   display: flex;
-  justify-content: center;   /* Centers the whole grid container */
+  justify-content: center; /* Centers the whole grid container */
 }
 
 /* Responsive Adjustments */
@@ -121,11 +160,11 @@ body {
   }
 }
 
-
 /* Movie Card */
 /* Movie Card Container */
 .movie-card {
-  background: #fff;
+  background: var(--card-bg);
+  color: var(--text-color);
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -167,12 +206,12 @@ body {
 .movie-card .details h2 {
   font-size: 1.1rem;
   margin: 5px 0;
-  color: #222;
+  color: var(--text-color);
   line-height: 1.4;
 }
 
 .movie-card .details p {
-  color: #666;
+  color: (--text-color);
   font-size: 0.9rem;
 }
 
@@ -193,7 +232,7 @@ body {
 /* Add to Favorites */
 .movie-card .btn-fav {
   background: linear-gradient(135deg, #ffcc00, #ff9900);
-  color: #222;
+  color: (--text-color);
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
 }
 
@@ -206,7 +245,7 @@ body {
 /* Remove Button */
 .movie-card .btn-remove {
   background: #ff4d4d;
-  color: #fff;
+  color: (--text-color);
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
 }
 
@@ -223,7 +262,6 @@ body {
   gap: 20px;
   padding: 20px;
 }
-
 
 .poster {
   width: 100%;
@@ -263,7 +301,7 @@ body {
   margin-top: auto;
   padding: 10px 16px;
   background: linear-gradient(135deg, #ffcc00, #ff9900);
-  color: #222;
+  color: (--text-color);
   border: none;
   border-radius: 30px;
   cursor: pointer;
@@ -285,7 +323,6 @@ body {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 }
 
-
 /* Loader */
 .loader {
   border: 6px solid #f3f3f3;
@@ -298,8 +335,12 @@ body {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* 🔹 Mobile Responsiveness */
@@ -334,4 +375,26 @@ body {
     flex-direction: column;
     gap: 10px;
   }
+}
+
+
+/* ====== THEME TOGGLE ====== */
+.theme-toggle {
+  margin-left: auto;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.theme-toggle:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.25);
 }

@@ -13,6 +13,22 @@ export default function App() {
   const [latest, setLatest] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [theme, setTheme] = useState("light");
+
+  // Persist theme in localStorage
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme") || "light";
+    setTheme(savedTheme);
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+  };
 
   // Load favorites from localStorage
   useEffect(() => {
@@ -101,6 +117,9 @@ export default function App() {
             <nav className="navbar">
               <Link to="/">Home</Link>
               <Link to="/favorites">⭐ Favorites</Link>
+                 <button onClick={toggleTheme} style={{ marginLeft: "auto" }}>
+                {theme === "light" ? "🌙 Dark" : "☀️ Light"}
+              </button>
             </nav>
             <div className="app-container">
               <header className="app-title">🎬 Movie Database</header>
