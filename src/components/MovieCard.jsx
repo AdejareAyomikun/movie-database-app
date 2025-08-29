@@ -19,12 +19,12 @@ export default function MovieCard({ movie, onFavorite, onRemove, isFavorite }) {
       {/* Conditional button */}
       {onFavorite && !isFavorite && (
         <button className="btn-fav" onClick={() => onFavorite(movie)}>
-          ⭐ Add to Favorites
+          Add to Favorites
         </button>
       )}
       {onRemove && (
         <button className="btn-remove" onClick={() => onRemove(movie.imdbID)}>
-          ❌ Remove
+          Remove
         </button>
       )}
     </div>

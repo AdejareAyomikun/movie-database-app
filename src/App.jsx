@@ -116,13 +116,13 @@ export default function App() {
           <>
             <nav className="navbar">
               <Link to="/">Home</Link>
-              <Link to="/favorites">⭐ Favorites</Link>
+              <Link to="/favorites">Favorites</Link>
                  <button onClick={toggleTheme} style={{ marginLeft: "auto" }}>
-                {theme === "light" ? "🌙 Dark" : "☀️ Light"}
+                {theme === "light" ? "Dark" : "Light"}
               </button>
             </nav>
             <div className="app-container">
-              <header className="app-title">🎬 Movie Database</header>
+              <header className="app-title">Movie Database</header>
               <SearchBar onSearch={handleSearch} />
               {loading ? (
                 <Loader />
@@ -135,7 +135,7 @@ export default function App() {
                   {/* Default Sections */}
                   {recommended.length > 0 && (
                     <>
-                      <h2>✨ Recommended</h2>
+                      <h2>Recommended</h2>
                       <MovieGrid
                         movies={recommended}
                         onFavorite={addToFavorites}
@@ -146,7 +146,7 @@ export default function App() {
 
                   {latest.length > 0 && (
                     <>
-                      <h2>🆕 Latest Releases</h2>
+                      <h2>Latest Releases</h2>
                       <MovieGrid
                         movies={latest}
                         onFavorite={addToFavorites}
@@ -159,7 +159,7 @@ export default function App() {
 
               {favorites.length > 0 && (
                 <>
-                  <h2>⭐ Your Favorites</h2>
+                  <h2>Your Favorites</h2>
                   <MovieGrid
                     movies={favorites}
                     onFavorite={addToFavorites}
