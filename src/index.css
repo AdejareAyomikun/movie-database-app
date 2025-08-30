@@ -138,6 +138,11 @@ html {
   text-align: center;
 }
 
+.back-link{
+  color: var(--text-color);
+  text-decoration: none;
+}
+
 /* Optional wrapper styling */
 .w-full {
   width: 100%;

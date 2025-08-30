@@ -42,3 +42,4 @@ export default function MovieDetails() {
     </div>
   );
 }
+-
